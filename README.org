@@ -1,0 +1,24 @@
+An asyncio subprocess wrapper that can watch for its process to exit.
+
+It does so by creating a task on the asyncio loop that blocks until the process exits.
+
+* Usage:
+
+#+BEGIN_SRC python
+
+  try:
+      proc: MonitoredSubprocess = MonitoredSubprocess(
+          "some_proc_name",
+          await asyncio.create_subprocess_exec(
+              ...
+          )
+      )
+      await proc.wait()
+  except asyncio.CancelledError:
+      await proc.stop()
+
+#+END_SRC
+
+Obviously `wait()` also blocks, so you will want it to be part of an
+`asyncio.gather()` somewhere.
+
