@@ -3,10 +3,10 @@ import asyncio
 import attr
 
 
-@attr.s
+@attr.s(auto_attribs=True)
 class MonitoredSubprocess:
-    name: str = attr.ib()
-    proc: asyncio.subprocess.Process = attr.ib()
+    name: str
+    proc: asyncio.subprocess.Process
     _stopped: bool = attr.ib(init=False, default=False)
     _early_exited: bool = attr.ib(init=False, default=False)
 
