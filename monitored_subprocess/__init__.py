@@ -1,1 +1,1 @@
-from .monitored_subprocess import MonitoredSubprocess
+from .monitored_subprocess import EarlyExitError, MonitoredSubprocess

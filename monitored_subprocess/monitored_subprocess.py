@@ -3,6 +3,10 @@ import asyncio
 import attr
 
 
+class EarlyExitError(Exception):
+    pass
+
+
 @attr.s(auto_attribs=True)
 class MonitoredSubprocess:
     name: str
@@ -41,6 +45,6 @@ class MonitoredSubprocess:
 
     async def check(self):
         if self._early_exited:
-            raise RuntimeError(
+            raise EarlyExitError(
                 f"Process {self.name} {self.proc.pid} exited before expected: {self.proc.returncode}"
             )
